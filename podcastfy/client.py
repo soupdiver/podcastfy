@@ -10,6 +10,7 @@ import os
 import uuid
 import typer
 import yaml
+import pprint
 from podcastfy.content_parser.content_extractor import ContentExtractor
 from podcastfy.content_generator import ContentGenerator
 from podcastfy.text_to_speech import TextToSpeech
@@ -58,11 +59,14 @@ def process_content(
     Process URLs, a transcript file, image paths, or raw text to generate a podcast or transcript.
     """
     try:
+        # pprint.pprint(vars(config))
         if config is None:
             config = load_config()
 
         # Load default conversation config
         conv_config = load_conversation_config()
+
+        pprint.pp(urls)
 
         # Update with provided config if any
         if conversation_config:
@@ -331,6 +335,9 @@ def generate_podcast(
                 raise ValueError(
                     "Config must be either a dictionary or a Config object"
                 )
+        
+        pprint.pprint("XXX")
+        pprint.pprint(config)
 
         if not conversation_config:
             conversation_config = load_conversation_config().to_dict()

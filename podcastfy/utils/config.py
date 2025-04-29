@@ -21,13 +21,13 @@ def get_config_path(config_file: str = 'config.yaml'):
 	try:
 		base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 		
-		# Look for config.yaml in the package root
-		config_path = os.path.join(base_path, config_file)
+		# look in the current working directory
+		config_path = os.path.join(os.getcwd(), config_file)
 		if os.path.exists(config_path):
 			return config_path
 		
-		# If not found, look in the current working directory
-		config_path = os.path.join(os.getcwd(), config_file)
+		# Look for config.yaml in the package root
+		config_path = os.path.join(base_path, config_file)
 		if os.path.exists(config_path):
 			return config_path
 		

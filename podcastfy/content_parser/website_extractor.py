@@ -60,7 +60,7 @@ class WebsiteExtractor:
 			raw_text = soup.get_text(separator="\n")  # Get all text content
 			cleaned_content = self.clean_content(raw_text)
 
-			return cleaned_content
+			return "\n\nNew Article:\n"+cleaned_content
 		except requests.RequestException as e:
 			logger.error(f"Failed to extract content from {url}: {str(e)}")
 			raise Exception(f"Failed to extract content from {url}: {str(e)}")

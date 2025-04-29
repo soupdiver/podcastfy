@@ -9,6 +9,7 @@ provides methods to generate and save the generated content.
 import os
 from typing import Optional, Dict, Any, List
 import re
+import pprint
 
 
 from langchain_community.chat_models import ChatLiteLLM
@@ -442,7 +443,9 @@ class StandardContentStrategy(ContentGenerationStrategy, ContentCleanerMixin):
             "engagement_techniques": ", ".join(
                 config_conversation.get("engagement_techniques", [])
             ),
+            "max_output_tokens": self.content_generator_config.get("max_output_tokens"),
         }
+        # print(self.content_generator_config.get("max_output_tokens"))
 
         # Add image paths to parameters if any
         for key, path in zip(image_path_keys, image_file_paths):
@@ -774,6 +777,7 @@ class ContentGenerator:
         Compose the prompt for the LLM based on the content list.
         """
         content_generator_config = self.config.get("content_generator", {})
+        # pprint.pprint(content_generator_config)
         
         # Get base template and commit values
         base_template = content_generator_config.get("prompt_template")
@@ -788,6 +792,8 @@ class ContentGenerator:
             commit = base_commit
 
         prompt_template = hub.pull(f"{template}:{commit}")
+        print("template:")
+        print(base_template)
 
         image_path_keys = []
         messages = []
@@ -881,6 +887,8 @@ class ContentGenerator:
                 image_path_keys,
                 input_texts
             )
+
+            pprint.pprint(prompt_params)
 
             # Generate content using selected strategy
             self.response = strategy.generate(

@@ -66,7 +66,7 @@ def process_content(
         # Load default conversation config
         conv_config = load_conversation_config()
 
-        pprint.pp(urls)
+        # pprint.pp(urls)
 
         # Update with provided config if any
         if conversation_config:
@@ -336,8 +336,8 @@ def generate_podcast(
                     "Config must be either a dictionary or a Config object"
                 )
         
-        pprint.pprint("XXX")
-        pprint.pprint(config)
+        # print("XXX")
+        # pprint.pprint(config)
 
         if not conversation_config:
             conversation_config = load_conversation_config().to_dict()

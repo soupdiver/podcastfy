@@ -888,7 +888,7 @@ class ContentGenerator:
                 input_texts
             )
 
-            pprint.pprint(prompt_params)
+            # pprint.pprint(prompt_params)
 
             # Generate content using selected strategy
             self.response = strategy.generate(

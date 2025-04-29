@@ -9,7 +9,7 @@ and a YAML file for non-sensitive configuration settings.
 import os
 from dotenv import load_dotenv, find_dotenv
 from typing import Any, Dict, Optional
-import yaml
+import yaml,pprint
 
 def get_config_path(config_file: str = 'config.yaml'):
 	"""
@@ -59,6 +59,7 @@ class Config:
 		
 		config_path = get_config_path(config_file)
 		if config_path:
+			pprint.pprint("using config: "+config_path)
 			with open(config_path, 'r') as file:
 				self.config: Dict[str, Any] = yaml.safe_load(file)
 		else:
